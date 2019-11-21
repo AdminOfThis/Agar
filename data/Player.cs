@@ -9,21 +9,23 @@ namespace Agar.data
 {
     class Player
     {
-        internal object Pos;
-
-        private String Name { get; set; }
-        public Vector Position { get; set; }
-      private int Mass { get; set; }
-        private Vector Direction { get; set; }
+        public String Name { get; private set; }
+        public Vector Possition { get; private set; }
+        public int Mass { get; private set; }
+        private double Speed {
+            get {
+                return Direction.Length;
+            }
+        }
+        public Vector Direction { get; private set; }
 
         public Player(String Name)
         {
             Console.WriteLine("New player");
             World.Instance.Players.Add(this);
             this.Name = Name;
-            Position = new Vector(100,100);
             Direction = new Vector();
-            
+            Possition = new Vector(World.WIDTH / 2, World.HEIGHT / 2);
             Mass = 0;
         }
         /**
@@ -31,7 +33,25 @@ namespace Agar.data
          * */
         public void move()
         {
-            
+            Possition = Possition + Direction;
         }
+
+        /**
+         * Eats another player and adds its mass to the current player
+         * */
+        public void eat(Player otherPlayer)
+        {
+            this.Mass += otherPlayer.Mass;
+        }
+
+        /**
+         * Eats food and adds its mass to the current player
+         * */
+        public void eat(Food food)
+        {
+            this.Mass += Food.Mass;
+        }
+
+
     }
 }

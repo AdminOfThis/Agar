@@ -13,8 +13,10 @@ namespace Agar.data
         public const double WIDTH = 400;
         public const double HEIGHT = 400;
 
+
         private static World _Instance;
         public static World Instance
+
         {
             get
             {
@@ -31,6 +33,9 @@ namespace Agar.data
                 return Instance;
             }
         }
+        private List<Player> players = new List<Player>();
+        private List<Food> foods = new List<Food>();
+
 
         public List<Player> Players = new List<Player>();
 
