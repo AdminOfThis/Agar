@@ -22,7 +22,8 @@ namespace Agar
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Dictionary<Player, Ellipse> map = new Dictionary<Player, Ellipse>();
+        private const double FPS = 60.0;
+
 
         public MainWindow()
         {
@@ -30,7 +31,7 @@ namespace Agar
             new Player("Me");
             Grid.Width = World.WIDTH;
             Grid.Height = World.HEIGHT;
-            Timer timer = new Timer(1000 / 2.0);
+            Timer timer = new Timer(1000 / FPS);
             timer.Elapsed += OnFrame;
             timer.AutoReset = true;
             timer.Enabled = true;
@@ -38,17 +39,32 @@ namespace Agar
 
         public void OnFrame(Object source, ElapsedEventArgs e)
         {
-            //Canvas.Dispatcher.Invoke(new Action(() => Canvas.Children.Clear()));
+            Canvas.Dispatcher.Invoke(new Action(() => Canvas.Children.Clear()));
 
             foreach (Player player in World.Instance.Players)
             {
-                Ellipse circle;
-                map.TryGetValue(player, out circle);
-
                 Canvas.Dispatcher.Invoke(new Action(() =>
                 {
+                    Ellipse circle;
+
+
+
+                    circle = new Ellipse();
+
+
+                    circle.Stroke = System.Windows.Media.Brushes.Black;
+                    circle.Fill = System.Windows.Media.Brushes.DarkBlue;
+                    circle.HorizontalAlignment = HorizontalAlignment.Left;
+                    circle.VerticalAlignment = VerticalAlignment.Center;
+                    circle.Width = 0;
+                    circle.Height = 0;
+                    Canvas.Children.Add(circle);
+
+
+
+
                     Point mousePos = Mouse.GetPosition(Canvas);
-                    Point playerPos = new Point(player.Possition.X, player.Possition.Y);
+                    Point playerPos = new Point(player.Possition.X + (player.Mass), player.Possition.Y + (player.Mass));
 
                     Vector direction = new Vector(mousePos.X - playerPos.X, mousePos.Y - playerPos.Y);
                     // direction.Normalize();
@@ -57,20 +73,11 @@ namespace Agar
                     player.move();
 
 
-                    if (circle == null)
-                    {
-                        circle = new Ellipse();
-                        map.Add(player, circle);
 
-                        circle.Stroke = System.Windows.Media.Brushes.Black;
-                        circle.Fill = System.Windows.Media.Brushes.DarkBlue;
-                        circle.HorizontalAlignment = HorizontalAlignment.Left;
-                        circle.VerticalAlignment = VerticalAlignment.Center;
-                        circle.Width = 50;
-                        circle.Height = 50;
-                        Canvas.Children.Add(circle);
 
-                    }
+                    circle.Width = player.Mass * 2;
+                    circle.Height = player.Mass * 2;
+
                     // Console.WriteLine(player.Possition.X + " " + player.Possition.Y);
 
                     Canvas.SetLeft(circle, player.Possition.X);

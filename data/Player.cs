@@ -26,7 +26,7 @@ namespace Agar.data
             this.Name = Name;
             Direction = new Vector();
             Possition = new Vector(World.WIDTH / 2, World.HEIGHT / 2);
-            Mass = 0;
+            Mass = 10;
         }
         /**
          * Moves the player depending on Speed and Direction, should be called every tick
