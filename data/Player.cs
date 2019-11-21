@@ -17,8 +17,7 @@ namespace Agar.data
         public Player(String Name)
         {
             this.Name = Name;
-            Speed = 0;
-            Direction = 0;
+            Direction = new System.Windows.Vector();
             X = 0;
             Y = 0;
             Mass = 0;
