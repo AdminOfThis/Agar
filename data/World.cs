@@ -16,6 +16,7 @@ namespace Agar.data
         private static World Instance;
 
         private List<Player> players = new List<Player>();
+        private List<Food> foods = new List<Food>();
         public static World getInstance()
         {
             if (Instance == null)

@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Agar.data
 {
     class Player
     {
-        private String Name { get; set; }
-        private double X { get; set; }
-        private double Y { get; set; }
-        private int Mass { get; set; }
-        private double Speed { get; set; }
-        private double Direction { get; set; }
+        public String Name { get; private set; }
+        public Vector Possition { get; private set; }
+        public int Mass { get; private set; }
+        private double Speed {
+            get {
+                return Direction.Length;
+            }
+        }
+        public Vector Direction { get; private set; }
 
         public Player(String Name)
         {
             this.Name = Name;
-            Speed = 0;
-            Direction = 0;
-            X = 0;
-            Y = 0;
+            Direction = new Vector();
+            Possition = new Vector(World.WIDTH / 2, World.HEIGHT / 2);
             Mass = 0;
         }
         /**
@@ -29,7 +31,25 @@ namespace Agar.data
          * */
         public void move()
         {
-
+            Possition = Possition + Direction;
         }
+
+        /**
+         * Eats another player and adds its mass to the current player
+         * */
+        public void eat(Player otherPlayer)
+        {
+            this.Mass += otherPlayer.Mass;
+        }
+
+        /**
+         * Eats food and adds its mass to the current player
+         * */
+        public void eat(Food food)
+        {
+            this.Mass += Food.Mass;         
+        }
+
+        
     }
 }
