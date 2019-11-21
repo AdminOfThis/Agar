@@ -13,17 +13,26 @@ namespace Agar.data
         public const double WIDTH = 400;
         public const double HEIGHT = 400;
 
-        private static World Instance;
-
-        private List<Player> players = new List<Player>();
-        public static World getInstance()
+        private static World _Instance;
+        public static World Instance
         {
-            if (Instance == null)
+            get
             {
-                Instance = new World();
+                    if (_Instance == null)
+                    {
+                        //retrieve the configuration file.
+                        //load the configuration and return it!
+                        _Instance = new World();
+                    }
+                    else
+                    {
+                        return _Instance;
+                    }
+                return Instance;
             }
-            return Instance;
         }
+
+        public List<Player> Players = new List<Player>();
 
         private World()
         { }

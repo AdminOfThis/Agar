@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Agar.data
 {
     class Player
     {
+        internal object Pos;
+
         private String Name { get; set; }
-        private double X { get; set; }
-        private double Y { get; set; }
-        private int Mass { get; set; }
-        private System.Windows.Vector Direction { get; set; }
+        public Vector Position { get; set; }
+      private int Mass { get; set; }
+        private Vector Direction { get; set; }
 
         public Player(String Name)
         {
+            Console.WriteLine("New player");
+            World.Instance.Players.Add(this);
             this.Name = Name;
-            Direction = new System.Windows.Vector();
-            X = 0;
-            Y = 0;
+            Position = new Vector(100,100);
+            Direction = new Vector();
+            
             Mass = 0;
         }
         /**
@@ -27,7 +31,7 @@ namespace Agar.data
          * */
         public void move()
         {
-            X = X + Direction.X;
+            
         }
     }
 }

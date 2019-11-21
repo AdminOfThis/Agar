@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Agar"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    
-    <Grid>
-        <Button>Test</Button>
+
+    <Grid Name="Grid">
+        <Canvas Name ="Canvas" Background="#FF999999" Margin="5"/>
     </Grid>
 </Window>
