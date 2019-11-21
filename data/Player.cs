@@ -12,8 +12,7 @@ namespace Agar.data
         private double X { get; set; }
         private double Y { get; set; }
         private int Mass { get; set; }
-        private double Speed { get; set; }
-        private double Direction { get; set; }
+        private System.Windows.Vector Direction { get; set; }
 
         public Player(String Name)
         {
@@ -29,7 +28,7 @@ namespace Agar.data
          * */
         public void move()
         {
-
+            X = X + Direction.X;
         }
     }
 }
