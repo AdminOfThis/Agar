@@ -34,3 +34,4 @@
 #Custom
 *.lock
 /bin
+/.vs
