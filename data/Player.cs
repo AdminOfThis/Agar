@@ -17,7 +17,7 @@ namespace Agar.data
                 return Direction.Length;
             }
         }
-        public Vector Direction { get; private set; }
+        public Vector Direction { get; set; }
 
         public Player(String Name)
         {
